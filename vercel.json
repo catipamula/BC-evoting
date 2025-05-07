@@ -1,13 +1,9 @@
 {
-    "builds": [{
-      "src": "EVoting/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.10.0" }
-    }],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "EVoting/wsgi.py"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    { "src": "EVoting/wsgi.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "EVoting/wsgi.py" }
+  ]
 }
