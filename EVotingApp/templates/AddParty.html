@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Voting - Add Party</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+
+    <style>
+        /* Background Image Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{% static 'images/Voter-Registration.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        /* Centered Form */
+        .container {
+            width: 400px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px #000;
+            text-align: center;
+        }
+
+        input[type="text"], select, input[type="file"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .menu ul li {
+            display: inline;
+            margin: 10px;
+        }
+
+        .menu ul li a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+		/* Reset Default Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navigation Menu Styles */
+.menu {
+    background: #333; /* Dark background */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.menu ul li {
+    margin: 0 15px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.menu ul li a:hover {
+    background: #FFD700; /* Gold color on hover */
+    color: black;
+    border-radius: 5px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .menu ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu ul li {
+        padding: 10px;
+    }
+}
+
+    </style>
+
+    <script>
+        function validate() {
+            var candidateName = document.getElementById("candidate_name").value.trim();
+            var partyName = document.getElementById("party_name").value.trim();
+            var areaName = document.getElementById("area_name").value.trim();
+            var imageFile = document.getElementById("profile_image").value.trim();
+
+            if (!candidateName) {
+                alert("Candidate Name must be entered.");
+                document.getElementById("candidate_name").focus();
+                return false;
+            }
+            if (!partyName) {
+                alert("Party Name must be selected.");
+                document.getElementById("party_name").focus();
+                return false;
+            }
+            if (!areaName) {
+                alert("Area Name must be entered.");
+                document.getElementById("area_name").focus();
+                return false;
+            }
+            if (!imageFile) {
+                alert("Profile Image must be uploaded.");
+                document.getElementById("profile_image").focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="menu">
+        <ul>
+            <li><a href="{% url 'AddParty' %}">Add Party</a></li>
+            <li><a href="{% url 'ViewParty' %}">View Parties</a></li>
+            <li><a href="{% url 'ViewVotes' %}">View Votes</a></li>
+            <li><a href="{% url 'index' %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Form Section -->
+    <div class="container">
+        <h2>Add Party Candidate</h2>
+        <form name="f1" method="post" action="{% url 'AddPartyAction' %}" enctype="multipart/form-data" onsubmit="return validate()">
+            {% csrf_token %}
+            
+            <input type="text" name="t1" id="candidate_name" placeholder="Enter Candidate Name" required />
+            
+            <select name="t2" id="party_name" required>
+                <option value="">-- Select Party --</option>
+                <option value="Congress">Congress</option>
+                <option value="BJP">BJP</option>
+                <option value="Janasena">Janasena</option>
+            </select>
+
+            <input type="text" name="t3" id="area_name" placeholder="Enter Area Name" required />
+
+            <input type="file" name="t4" id="profile_image" required />
+
+            <input type="submit" value="Add Party">
+        </form>
+    </div>
+
+</body>
+</html>
