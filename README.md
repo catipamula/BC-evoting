@@ -1,4 +1,4 @@
-# Django-inventory-management
+# Block chain on Evoting 
 
 ## Description
 This system is built with Python (Django), JavaScript, Bootstrap, HTML, and CSS. The system offers a user-friendly front-end for general users and a secure back-end exclusively accessible to administrators. The back-end seamlessly retrieves and displays vital data from the database.
